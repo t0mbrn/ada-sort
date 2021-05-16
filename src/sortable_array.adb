@@ -11,14 +11,11 @@ package body Sortable_Array is
 
   use type Asu.Unbounded_String;
 
-  -----------------------------------------------------------------------------
+  ------------------------------------------------------------------------------
   --
-  -- Description:
-  --   Generates a random Sortable_Array.
-  --
-  function Generate_Random_Array (Array_Size : in Natural := Size) return Sortable_Array is
+  function Generate_Random_Array (Array_Size : in Natural := Size) return Object is
 
-    Random_Array : Sortable_Array (0 .. Size) := (others => 0);
+    Random_Array : Object (0 .. Size) := (others => 0);
 
     ----------------------------------------------------------------------------
     --
@@ -41,7 +38,7 @@ package body Sortable_Array is
 
   begin
 
-    -- Loop over each array element and generate a random number in the Sortable_Array_Range.
+    -- Loop over each array element and generate a random number in the Random_Array.Object_Range.
     for X in Random_Array'Range loop
       Random_Array (X) := Generate_Random_Number;
     end loop;
@@ -52,29 +49,26 @@ package body Sortable_Array is
 
   ------------------------------------------------------------------------------
   --
-  -- Description:
-  --   Swap the values at the given indices in the Sortable_Array.
-  --
-  procedure Swap (Object : in out Sortable_Array;
-                  Left   : in Integer;
-                  Right  : in Integer) is
-    Temp : Natural := Object (Left);
+  procedure Swap
+    (This  : in out Object;
+     Left  : in Integer;
+     Right : in Integer) is
+
+    Temp : Natural := This (Left);
+
   begin
-    Object (Left)  := Object (Right);
-    Object (Right) := Temp;
+    This (Left)  := This (Right);
+    This (Right) := Temp;
   end Swap;
 
   ------------------------------------------------------------------------------
   --
-  -- Description:
-  --   Return a boolean indicating whether the given array is sorted.
-  --
-  function Is_Sorted (Object : in Sortable_Array) return Boolean is
+  function Is_Sorted (This : in Object) return Boolean is
   begin
 
-    for Index in Object'First .. Object'Last - 1 loop
+    for Index in This'First .. This'Last - 1 loop
 
-      if Object (Index) > Object (Index + 1) then
+      if This (Index) > This (Index + 1) then
         return False;
       end if;
 
@@ -87,21 +81,21 @@ package body Sortable_Array is
   ------------------------------------------------------------------------------
   --
   -- Description:
-  --   Print the Sortable_Array line-by-line.
+  --   Print the array line-by-line.
   --
-  procedure Print_By_Line (Object : in Sortable_Array) is
+  procedure Print_By_Line (This : in Object) is
   begin
-    for X in Object'Range loop
-      Ada.Text_IO.Put_Line (X'Img & " =>" & Object(X)'Img);
+    for X in This'Range loop
+      Ada.Text_IO.Put_Line (X'Img & " =>" & This (X)'Img);
     end loop;
   end Print_By_Line;
 
   ------------------------------------------------------------------------------
   --
   -- Description:
-  --   Print the Sortable_Array in rows of a constant size.
+  --   Print the array in rows of a constant size.
   --
-  procedure Print_Condensed (Object : in Sortable_Array) is
+  procedure Print_Condensed (This : in Object) is
 
     Print_String      : Asu.Unbounded_String := Asu.To_Unbounded_String("");
     New_Line          : constant Character   := Character'Val(13);
@@ -151,13 +145,13 @@ package body Sortable_Array is
 
   begin
 
-    for X in Object'Range loop
+    for X in This'Range loop
 
       if Elements_Listed mod Elements_Per_Line = 0 then
         Ada.Text_IO.Put_Line (Asu.To_String (Print_String));
         Print_String := Asu.To_Unbounded_String("");
       else
-        Print_String := Print_String & " " & Format_Value (Object(X));
+        Print_String := Print_String & " " & Format_Value (This(X));
       end if;
 
       Elements_Listed := Elements_Listed + 1;
@@ -168,22 +162,20 @@ package body Sortable_Array is
 
   end Print_Condensed;
 
-  -------------------------------------------------------------------------------
+  ------------------------------------------------------------------------------
   --
-  -- Description:
-  --   Print either line-by-line or condensed according to the given print type.
-  --
-  procedure Print (Object : in Sortable_Array;
-                   Format : in Print_Format_Type := Condensed) is
+  procedure Print
+    (This   : in Object;
+     Format : in Print_Format_Type := Condensed) is
   begin
 
     case Format is
 
       when Line_By_Line =>
-        Print_By_Line (Object);
+        Print_By_Line (This);
 
       when Condensed =>
-        Print_Condensed (Object);
+        Print_Condensed (This);
 
     end case;
 

@@ -1,4 +1,4 @@
-package Sort_Pkg is
+package Tests is
 
   type Output_Format_Type is (Full,
                               Time_Summary,
@@ -14,4 +14,4 @@ package Sort_Pkg is
   procedure Sort_Test_One (Output_Format : in Output_Format_Type := Test_Output);
 
 
-end Sort_Pkg;
+end Tests;
