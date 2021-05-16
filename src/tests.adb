@@ -33,7 +33,7 @@ package body Tests is
 
   procedure Print
     (Results  : in Test_Results;
-     Format   : in Output_Format_Type := Default_Format) is
+     Format   : in Output_Format := Default_Format) is
 
     ----------------------------------------------------------------------------
     --
@@ -143,7 +143,7 @@ package body Tests is
 
   ------------------------------------------------------------------------------
   --
-  procedure Test_One (Format : in Output_Format_Type := Default_Format) is
+  procedure Test_One is
 
     Results : Test_Results;
 
