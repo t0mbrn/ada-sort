@@ -1,10 +1,15 @@
 with Random_Array;
 
+--  @summary
+--  Interface for Sorting Algorithms
+--
+--  @description
+--  This package defines the interface for sorting algorithms to implement. The
+--  main routine Sort defines the algorithm itself.
+--
 package Sort_Interface is
 
   type Object is interface;
-  
-  type Object_Access is access Object'Class;
   
   --  Return the name of this sorting algorithm.
   --

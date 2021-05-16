@@ -1,5 +1,4 @@
--------------------------------------------------------------------------------
---
+
 --  @summary
 --  Sortable Array
 --
@@ -10,8 +9,6 @@
 --  with - minimum/maximum array values, the length of the array. Here we
 --  define the array's value, range and the array itself.
 --
--------------------------------------------------------------------------------
-
 generic
 
   -- Minimum and Maximum array values
@@ -35,7 +32,7 @@ package Sortable_Array is
   --
   --  @return  the random of array
   --
-  function Generate_Random_Array
+  function Generate
     (Array_Size : Natural := Size)
      return Object;
 
@@ -66,8 +63,8 @@ package Sortable_Array is
 
   --  Print the array in one of the provided formats
   --
-  --  @param  the sortable array
-  --  @param  the format to print the array in
+  --  @param This    the sortable array
+  --  @param Format  the format to print the array in
   --
   procedure Print
     (This   : in Object;

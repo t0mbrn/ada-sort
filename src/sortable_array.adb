@@ -13,16 +13,16 @@ package body Sortable_Array is
 
   ------------------------------------------------------------------------------
   --
-  function Generate_Random_Array (Array_Size : in Natural := Size) return Object is
+  function Generate (Array_Size : in Natural := Size) return Object is
 
-    Random_Array : Object (0 .. Size) := (others => 0);
+    Output : Object (0 .. Size) := (others => 0);
 
     ----------------------------------------------------------------------------
     --
     -- Description:
     --   Generate a single random Value.
     --
-    function Generate_Random_Number return Value is
+    function Random_Number return Value is
 
       Seed         : Random.Generator;
       Random_Value : Value := 0;
@@ -30,22 +30,23 @@ package body Sortable_Array is
     begin
 
       Random.Reset (Seed);
-      Random_Value := Random.Random(Seed);
+      Random_Value := Random.Random (Seed);
 
       return Random_Value;
 
-    end Generate_Random_Number;
+    end Random_Number;
 
   begin
 
-    -- Loop over each array element and generate a random number in the Random_Array.Object_Range.
-    for X in Random_Array'Range loop
-      Random_Array (X) := Generate_Random_Number;
+    -- Loop over each array element and generate a random number in
+    -- range set for this generic.
+    for X in Output'Range loop
+      Output (X) := Random_Number;
     end loop;
 
-    return Random_Array;
+    return Output;
 
-  end Generate_Random_Array;
+  end Generate;
 
   ------------------------------------------------------------------------------
   --
@@ -63,7 +64,10 @@ package body Sortable_Array is
 
   ------------------------------------------------------------------------------
   --
-  function Is_Sorted (This : in Object) return Boolean is
+  function Is_Sorted
+    (This : in Object)
+     return Boolean is
+
   begin
 
     for Index in This'First .. This'Last - 1 loop
@@ -85,9 +89,11 @@ package body Sortable_Array is
   --
   procedure Print_By_Line (This : in Object) is
   begin
+
     for X in This'Range loop
       Ada.Text_IO.Put_Line (X'Img & " =>" & This (X)'Img);
     end loop;
+
   end Print_By_Line;
 
   ------------------------------------------------------------------------------
@@ -108,9 +114,13 @@ package body Sortable_Array is
     -- Description:
     --   Return the number of digits in the given value.
     --
-    function Count_Digits (Value : in Natural) return Natural is
+    function Count_Digits
+      (Value : in Natural)
+       return Natural is
+
       Base       : Natural := 10;
       Num_Digits : Natural := 1;
+
     begin
 
       while Value mod Base /= Value loop
@@ -129,15 +139,16 @@ package body Sortable_Array is
     -- Description:
     --   Return a fixed-width string of the given Value.
     --
-    function Format_Value (Value : in Natural) return String is
+    function Format_Value
+      (Value : in Natural)
+       return String is
 
       Max_Digits  : constant Natural := Count_Digits (Max);
 
     begin
 
       return Ada.Strings.Fixed.Tail
-        (Source => Ada.Strings.Fixed.Trim (Source => Value'Img,
-                                           Side   => Ada.Strings.Both),
+        (Source => Ada.Strings.Fixed.Trim (Value'Img, Ada.Strings.Both),
          Count  => Max_Digits,
          Pad    => '0');
 
@@ -145,13 +156,13 @@ package body Sortable_Array is
 
   begin
 
-    for X in This'Range loop
+    for Index in This'Range loop
 
       if Elements_Listed mod Elements_Per_Line = 0 then
         Ada.Text_IO.Put_Line (Asu.To_String (Print_String));
-        Print_String := Asu.To_Unbounded_String("");
+        Print_String := Asu.Null_Unbounded_String;
       else
-        Print_String := Print_String & " " & Format_Value (This(X));
+        Print_String := Print_String & " " & Format_Value (This (Index));
       end if;
 
       Elements_Listed := Elements_Listed + 1;
@@ -167,6 +178,7 @@ package body Sortable_Array is
   procedure Print
     (This   : in Object;
      Format : in Print_Format_Type := Condensed) is
+
   begin
 
     case Format is
