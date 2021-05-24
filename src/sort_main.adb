@@ -1,8 +1,8 @@
-with Tests;
+with User_Input_Output;
 
 procedure Sort_Main is
 begin
 
-  Tests.Test_One;
+  User_Input_Output.Prompt_User;
 
 end Sort_Main;
