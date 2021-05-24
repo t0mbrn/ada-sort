@@ -19,7 +19,16 @@ jobs:
       run: sudo apt-get update
 
     - name: Set up GNAT toolchain
-      run: sudo apt-get -y install gnat gprbuild
+      run: sudo apt-get -y install gnat gprbuild asis-programs
 
     - name: Build
       run: gprbuild -j0 -p sorting.gpr
+
+    - name: Generate test skeleton
+      run: gnattest -dd -P sorting.gpr -v -r
+
+    - name: Build test project
+      run: gprbuild -p -Ptest/harness/test_driver.gpr
+
+    - name: Run unit tests
+      run: test/harness/test_runner --passed-tests=hide --skeleton-default=pass

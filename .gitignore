@@ -4,3 +4,4 @@ docs
 docs/*
 test/harness
 test/harness/*
+.token
