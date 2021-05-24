@@ -5,6 +5,7 @@ with Ada.Numerics.Discrete_Random;
 with Ada.Strings.Fixed;
 with Ada.Strings.Unbounded;
 with Ada.Text_IO;
+with Algorithms;
 with Bubble_Sort;
 with Heap_Sort;
 with Insertion_Sort;
@@ -145,32 +146,25 @@ package body User_Input_Output is
   --
   procedure Select_Sort_Callback is
 
-    Algorithms : constant array (Positive range 1 .. 6) of access Sort_Interface.Object'Class :=
-      (new Insertion_Sort.Object,
-       new Selection_Sort.Object,
-       new Bubble_Sort.Object,
-       new Quick_Sort.Object,
-       new Merge_Sort.Object,
-       new Heap_Sort.Object);
-
     Selection : Integer := 0;
 
   begin
 
     Ada.Text_IO.Put_Line (NL & "Select sorting algorithm: ");
 
-    for Index in Algorithms'Range loop
-      Ada.Text_IO.Put_Line (Index'Img & ". " & Algorithms (Index).Name);
+    for Index in Algorithms.Algorithm_Range loop
+      Ada.Text_IO.Put_Line (Index'Img & ". " & Algorithms.Get_Algorithm (Index).Name);
     end loop;
 
     Ada.Text_IO.Put ("> ");
     Ada.Integer_Text_IO.Get (Selection);
+    Current_Sort := Algorithms.Get_Algorithm (Selection);
 
-    if Selection in Algorithms'Range then
-      Current_Sort := Algorithms (Selection);
-    else
+  exception
+
+    when Algorithms.Invalid_Index =>
+
       Ada.Text_IO.Put_Line ("Invalid selection.");
-    end if;
 
   end Select_Sort_Callback;
 
@@ -307,13 +301,9 @@ package body User_Input_Output is
 
   begin
 
-    -- Test Runs
-    Results (1) := Run_Sort (new Insertion_Sort.Object);
-    Results (2) := Run_Sort (new Selection_Sort.Object);
-    Results (3) := Run_Sort (new Bubble_Sort.Object);
-    Results (4) := Run_Sort (new Quick_Sort.Object);
-    Results (5) := Run_Sort (new Merge_Sort.Object);
-    Results (6) := Run_Sort (new Heap_Sort.Object);
+    for Index in Algorithms.Algorithm_Range loop
+      Results (Index) := Run_Sort (Algorithms.Get_Algorithm (Index));
+    end loop;
 
     Print (Results);
 
@@ -335,11 +325,12 @@ package body User_Input_Output is
     Callback : access procedure;
   end record;
 
-  Options : constant array (Positive range 1 .. 5) of Option :=
+  Options : constant array (Positive range 1 .. 6) of Option :=
     ((To_Unbounded_String ("Generate new random array"), Generate_Array_Callback'Access),
      (To_Unbounded_String ("Change output format"),      Output_Format_Callback'Access),
      (To_Unbounded_String ("Select sorting algorithm"),  Select_Sort_Callback'Access),
      (To_Unbounded_String ("Perform sort"),              Perform_Sort_Callback'Access),
+     (To_Unbounded_String ("Run all sorts"),             Run_All_Callback'Access),
      (To_Unbounded_String ("Exit"),                      Exit_Callback'Access));
 
   ------------------------------------------------------------------------------

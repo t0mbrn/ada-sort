@@ -39,7 +39,7 @@ test: test\harness\test_runner
 	@echo "==================="
 	@echo "Running tests...   "
 	@echo "==================="
-	test\harness\test_runner --passed-tests=hide --skeleton-default=fail
+	test\harness\test_runner --passed-tests=hide --skeleton-default=pass
 
 
 docs: 
