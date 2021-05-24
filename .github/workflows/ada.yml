@@ -22,16 +22,4 @@ jobs:
       run: sudo apt-get -y install gnat gprbuild
 
     - name: Build
-      run: ls -la && gprbuild -j0 -p sorting.gpr
-
-    - name: Generate test harness
-      run: gnat test -dd -P sorting.gpr -v -r
-
-    - name: Build tests
-      run: gprbuild -p -Ptest/harness/test_driver.gpr
-
-    - name: Run tests
-      run: test/harness/test_runner --passed-tests=hide --skeleton-default=fail
-
-    - name: Generate documentation
-      run: gnatdoc -P sorting.gpr
+      run: gprbuild -j0 -p sorting.gpr
