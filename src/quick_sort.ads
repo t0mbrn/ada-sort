@@ -19,7 +19,7 @@ package Quick_Sort is
 --- end;
 --- ```
 
-    overriding function Sort
+  overriding
   function Sort
     (This       : in Object;
      Sort_Array : in Random_Array.Object)
