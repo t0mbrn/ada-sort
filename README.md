@@ -15,6 +15,10 @@ The following sorting algorithms have been implemented:
 * Quick Sort
 * Selection Sort
 
+## DocTests
+
+In the ads files you can find documentation tests for the ADA code.
+
 ## Build
 
 A Makefile is provided to build, test and generate documentation for this project. To build the project, run the following:
