@@ -7,7 +7,7 @@ package Random_Array is
     (Min  => 0,
      Max  => 99,
      Size => 500);
-  
+
   subtype Object is Functions.Object;
 
 end Random_Array;

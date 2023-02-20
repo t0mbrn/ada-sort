@@ -42,6 +42,18 @@ package Sortable_Array is
   --  @param Left   the left element to swap
   --  @param Right  the right element to swap
   --
+--- ```
+--- --test swap
+--- declare
+---     Int_Array  : Sortable_Array.Object := Sortable_Array.Functions.Generate(3);
+---     Int_Array2 : Sortable_Array.Object := Int_Array;
+--- begin
+---     Random_Array.Functions.Swap (Int_Array, 1, 2);
+---     Ahven.Assert
+---      (Condition   => (Int_Array(2)=Int_Array2(1) and Int_Array(1)=Int_Array2(2)),
+---       Message  => "Array indexes didnt get swapped correctly");
+--- end;
+--- ```
   procedure Swap
     (This  : in out Object;
      Left  : in Integer;
