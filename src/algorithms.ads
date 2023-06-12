@@ -6,14 +6,15 @@ with Selection_Sort;
 with Sort_Interface;
 with Quick_Sort;
 
---  @summary
---  Container for Sorting Algorithms
---
---  @description
---  This package provides a container for storing the full list of sorting
---  algorithms.
---
+
 package Algorithms is
+---  @summary
+---  Container for Sorting Algorithms
+---
+---  @description
+---  This package provides a container for storing the full list of sorting
+---  algorithms.
+---
 
   Invalid_Index : Exception;
 
@@ -22,21 +23,22 @@ package Algorithms is
   type Algorithm_List is array (Algorithm_Range) of access Sort_Interface.Object'Class;
 
 
-  --  Return the list of sorting algorithms.
-  --
-  --  @return  the list of sorting algorithms
-  --
+
   function Get_Algorithms return Algorithm_List;
+---  Return the list of sorting algorithms.
+---
+---  @return  the list of sorting algorithms
+---
 
 
-  --  Return the sorting algorithms implementation at the given index.
-  --
-  --  @return  the sorting algorithms implementation.
-  --
+
   function Get_Algorithm
     (Index : in Integer)
      return access Sort_Interface.Object'Class;
-
+---  Return the sorting algorithms implementation at the given index.
+---
+---  @return  the sorting algorithms implementation.
+---
 
 private
 

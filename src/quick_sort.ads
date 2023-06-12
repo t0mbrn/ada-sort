@@ -4,6 +4,7 @@ with Random_Array;
 package Quick_Sort is
 
   type Object is new Sort_Interface.Object with null record;
+    
 
 --- ```
 --- -- Testing for the correct Name
@@ -17,7 +18,6 @@ package Quick_Sort is
 ---       Message  => "Name did not match expected. Expected: " & Name);
 --- end;
 --- ```
-
   overriding
   function Name (This : in Object) return String is ("Quick Sort");
 
@@ -36,7 +36,6 @@ package Quick_Sort is
 ---       Message   => "The array was not sorted correctly.");
 --- end;
 --- ```
-
   overriding
   function Sort
     (This       : in Object;
