@@ -7,10 +7,10 @@ package Bubble_Sort is
 
 
 --- ```
---- -- Testing for the correct Name
+--- -- Testing for the correct Name !!! should fail
 --- declare
 ---     Algorithm : Bubble_Sort.Object;
----     Name : constant String := "Bubble Sort";
+---     Name : constant String := "Bubble Sort1";
 --- begin
 ---     Ahven.Assert
 ---      (Condition   => Algorithm.Name = Name,
