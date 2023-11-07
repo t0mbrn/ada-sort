@@ -3,7 +3,7 @@
 [![Ada (GNAT)](https://github.com/AdmaJonse/ada-sort/actions/workflows/ada.yml/badge.svg?branch=main)](https://github.com/AdmaJonse/ada-sort/actions/workflows/ada.yml)
 
 ------
-This fork was modified to include [AdaDocTests](https://github.com/t0mbrn/adadoctest/) (Ahven Unit Test in comments in the source code.).
+This fork was modified to include [AdaDocTests](https://github.com/t0mbrn/adadoctest/) (Ahven Unit Test in comments inside source code).
 The unit tests from `/test` were implemented in the corresponding source files in `/src`.
 
 ------
