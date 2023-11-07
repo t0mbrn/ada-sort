@@ -2,8 +2,13 @@
 
 [![Ada (GNAT)](https://github.com/AdmaJonse/ada-sort/actions/workflows/ada.yml/badge.svg?branch=main)](https://github.com/AdmaJonse/ada-sort/actions/workflows/ada.yml)
 
+------
+This fork was modified to include [AdaDocTests](https://github.com/t0mbrn/adadoctest/) (Ahven Unit Test in comments in the source code.).
+The unit tests from `/test` were implemented in the corresponding source files in `/src`.
+------
+
 ## Overview
-This repository contains implementations of basic sorting algorithms in Ada, as well as infrastructure used to generate random numeric data and to time the sort operations. 
+This repository contains implementations of basic sorting algorithms in Ada, as well as infrastructure used to generate random numeric data and to time the sort operations.
 
 The user is prompted to select a sorting algorithm and output format, then they can execute a sort of a random test array.
 
